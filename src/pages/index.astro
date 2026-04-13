@@ -43,6 +43,7 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
             </div>
             <p class="text-copper font-medium" style="font-family: system-ui, sans-serif;">{menu.price}</p>
             <p class="text-sm text-muted mt-2 leading-relaxed">{menu.description}</p>
+            <button data-add-item data-name={menu.name} data-price={menu.price.replace(/[^0-9]/g, '')} data-label="Add to Quote" class="mt-3 rounded-lg bg-copper/10 text-copper text-xs font-medium px-3 py-1.5 hover:bg-copper/20 transition-colors" style="font-family: system-ui, sans-serif;">Add to Quote</button>
           </div>
         ))}
       </div>
@@ -146,6 +147,19 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
       </form>
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll('[data-add-item]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const el = btn as HTMLElement;
+        const name = el.dataset.name!;
+        const price = el.dataset.price!;
+        (window as any).addToCart(name, price);
+        el.textContent = 'Added!';
+        setTimeout(() => { el.textContent = el.dataset.label || 'Add to Quote'; }, 1000);
+      });
+    });
+  </script>
 
   <script>
     document.getElementById('inquiry-form')?.addEventListener('submit', (e) => {
