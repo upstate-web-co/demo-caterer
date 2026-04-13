@@ -1,0 +1,7 @@
+{
+  "name": "demo-caterer",
+  "type": "module",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "@astrojs/cloudflare": "^12.6.0", "astro": "^5.7.0" },
+  "devDependencies": { "@tailwindcss/vite": "^4.0.0", "tailwindcss": "^4.0.0" }
+}
