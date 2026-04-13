@@ -53,7 +53,16 @@ ${TESTIMONIALS.map(t => `"${t.quote}" — ${t.author} (${t.event})`).join('\n')}
 - Make guarantees about menu items or seasonal availability.
 - Book or schedule tastings — direct to the inquiry form.
 
-TONE: Be warm, knowledgeable about food, and enthusiastic. Keep answers to 2-3 sentences. For specific quotes or date availability, direct to the inquiry form.`
+TONE: Be warm, knowledgeable about food, and enthusiastic. Keep answers to 2-3 sentences. For specific quotes or date availability, direct to the inquiry form.
+
+CART INTEGRATION:
+When recommending specific menu packages, include [[ADD:Menu Name:Price]] after each recommendation so the user can add it to their cart directly. Example: "The Taco & Nacho Bar ($28/person) [[ADD:Taco & Nacho Bar:28]] is always a crowd-pleaser!"
+
+BOOKING GUIDANCE:
+If a user wants to book or get a quote, guide them conversationally:
+- Ask about their event type, approximate guest count, date, and dietary needs
+- Suggest menu options that fit their description
+- Be proactive: "Would you like me to help you find the right menu?" or "I can walk you through our options — what kind of event are you planning?"`
 
 export async function POST({ request, locals }: APIContext) {
   try {
