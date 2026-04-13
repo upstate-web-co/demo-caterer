@@ -189,10 +189,12 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
         : 'bg-warm rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%] text-sm leading-relaxed'
       if (role === 'assistant') {
         const escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-        const html = escaped.replace(/\[\[ADD:([^:]+):([^\]]+)\]\]/g, (_, name, price) => {
+        let html = escaped.replace(/\[\[ADD:([^:]+):([^\]]+)\]\]/g, (_, name, price) => {
           const safeName = name.replace(/'/g, "\\'")
           return `<button onclick="(window).addToCart('${safeName}', '${price}')" class="inline-block mt-1 px-3 py-1 rounded-lg bg-copper/20 text-copper text-xs font-bold hover:bg-copper/30 transition-colors">+ Add ${name} to cart</button>`
         })
+        html = html.replace(/\((\d{3})\)\s*(\d{3})-(\d{4})/g, '<a href="tel:$1$2$3" class="underline">($1) $2-$3</a>')
+        html = html.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, '<a href="mailto:$1" class="underline">$1</a>')
         bubble.innerHTML = html
       } else {
         bubble.textContent = text
