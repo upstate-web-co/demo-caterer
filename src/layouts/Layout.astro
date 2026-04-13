@@ -11,12 +11,13 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://images.unsplash.com" />
 </head>
 <body class="bg-linen text-charcoal antialiased">
   <nav class="sticky top-0 z-50 bg-linen/95 backdrop-blur-sm border-b border-copper/10">
     <div class="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
-      <a href="/" class="text-xl tracking-wide"><span class="text-copper">Southern</span> Table</a>
+      <a href="/" class="text-xl tracking-wide"><span class="text-copper">Copper</span> Elm</a>
       <div class="hidden md:flex items-center gap-6 text-sm" style="font-family: system-ui, sans-serif;">
         <a href="#menus" class="text-muted hover:text-copper transition-colors">Menus</a>
         <a href="#gallery" class="text-muted hover:text-copper transition-colors">Gallery</a>
@@ -30,7 +31,7 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
   <!-- Demo Disclaimer -->
   <div class="bg-yellow-50 border-y border-yellow-200 py-3 px-6 text-center">
     <p class="text-xs text-yellow-800">
-      <strong>Portfolio Demo</strong> — This is a sample site built by <a href="https://upstate-web.com" class="underline hover:text-yellow-900">Upstate Web Co</a> to showcase what we build for this industry. This is not a real business.
+      <strong>Portfolio Demo</strong> — This is a fictional business created by <a href="https://upstate-web.com" class="underline hover:text-yellow-900">Upstate Web Co</a>. All names, locations, and details are entirely fictional.
     </p>
   </div>
 
@@ -38,7 +39,7 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
     <div class="mx-auto max-w-6xl px-6 py-10">
       <div class="grid md:grid-cols-3 gap-8">
         <div>
-          <p class="text-lg tracking-wide"><span class="text-copper">Southern</span> Table</p>
+          <p class="text-lg tracking-wide"><span class="text-copper">Copper</span> Elm</p>
           <p class="text-sm text-muted mt-2">{SITE.tagline}</p>
           <p class="text-sm text-muted">{SITE.location}</p>
         </div>

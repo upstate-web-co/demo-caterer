@@ -9,7 +9,7 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
     <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=1600&q=80" alt="Catering spread" class="absolute inset-0 w-full h-full object-cover brightness-[0.35]" loading="eager" />
     <div class="relative text-center px-6">
       <p class="text-copper-light text-sm uppercase tracking-[0.25em] mb-4" style="font-family: system-ui, sans-serif;">Full-Service Catering · Greenville, SC</p>
-      <h1 class="text-5xl md:text-7xl text-white tracking-tight">Southern Table</h1>
+      <h1 class="text-5xl md:text-7xl text-white tracking-tight">Copper Elm</h1>
       <p class="mt-4 text-xl text-white/80 italic">{SITE.tagline}</p>
       <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center" style="font-family: system-ui, sans-serif;">
         <a href="#inquiry" class="rounded-lg bg-copper px-8 py-3 font-medium text-white hover:bg-copper-dark transition-colors">Get a Quote</a>
@@ -168,7 +168,7 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
         const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text }) })
         const data = await res.json()
         aiResponse.textContent = data.reply || 'Not sure — fill out the inquiry form and we\'ll help!'
-      } catch { aiResponse.textContent = 'Something went wrong. Email us at events@southerntablecatering.com!' }
+      } catch { aiResponse.textContent = 'Something went wrong. Email us at events@copperelmcatering.com!' }
     }
     aiSend.addEventListener('click', askAI)
     aiInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') askAI() })

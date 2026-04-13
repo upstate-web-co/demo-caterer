@@ -1,8 +1,8 @@
 export const SITE = {
-  name: 'Southern Table Catering',
+  name: 'Copper Elm Catering',
   tagline: 'From our kitchen to your celebration',
-  url: 'https://southerntablecatering.com',
-  email: 'events@southerntablecatering.com',
+  url: 'https://copperelmcatering.com',
+  email: 'events@copperelmcatering.com',
   phone: '(864) 555-6183',
   location: 'Greenville, SC',
 } as const
@@ -19,7 +19,7 @@ export const MENUS = [
 export const EVENT_TYPES = ['Wedding', 'Corporate', 'Rehearsal Dinner', 'Birthday / Anniversary', 'Holiday Party', 'Nonprofit Gala', 'Graduation', 'Other']
 
 export const TESTIMONIALS = [
-  { quote: 'Southern Table catered our 200-person wedding and every single guest raved about the food. The shrimp and grits station was the highlight of the night.', author: 'Emily & Ryan', event: 'Wedding, 200 guests, The Cliffs' },
+  { quote: 'Copper Elm catered our 200-person wedding and every single guest raved about the food. The shrimp and grits station was the highlight of the night.', author: 'Emily & Ryan', event: 'Wedding, 200 guests, The Grandview Estate' },
   { quote: 'We\'ve used them for 3 corporate events now. They handle everything — setup, serving, cleanup. Our team just shows up and eats.', author: 'Morgan P.', event: 'Corporate quarterly dinners, 80 guests' },
   { quote: 'The farm-to-table menu was incredible. They worked with our venue to create something truly special and seasonal.', author: 'Jen W.', event: 'Anniversary party, 60 guests' },
 ]
