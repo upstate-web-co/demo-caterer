@@ -57,7 +57,7 @@ TONE: Be warm, knowledgeable about food, and enthusiastic. Keep answers to 2-3 s
 
 export async function POST({ request, locals }: APIContext) {
   try {
-    const { message } = await request.json()
+    const { message, history = [] } = await request.json() as { message?: string; history?: Array<{ role: string; content: string }> }
     if (!message) return Response.json({ reply: 'What can I help you with? Ask about menus, pricing, dietary options, event types, or how to book!' })
     const env = (locals as Record<string, any>).runtime?.env
     const apiKey = env?.ANTHROPIC_API_KEY
@@ -101,7 +101,7 @@ export async function POST({ request, locals }: APIContext) {
     }
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 256, system: SYSTEM_PROMPT, messages: [{ role: 'user', content: message }] }),
+      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 256, system: SYSTEM_PROMPT, messages: [...history.slice(-20).map(h => ({ role: h.role as 'user' | 'assistant', content: h.content })), { role: 'user' as const, content: message }] }),
     })
     const data = await response.json() as { content?: { text: string }[] }
     return Response.json({ reply: data.content?.[0]?.text || 'Not sure about that — fill out the inquiry form and we\'ll help!' })

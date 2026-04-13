@@ -18,14 +18,16 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
     </div>
   </section>
 
-  <!-- Inline AI -->
+  <!-- AI Chat -->
   <section class="bg-warm py-6 px-6">
     <div class="mx-auto max-w-xl">
-      <div class="flex gap-2">
-        <input id="ai-ask" type="text" placeholder="Can you do a BBQ for 100? What about gluten-free options? How far in advance should I book?" class="flex-1 rounded-lg border border-copper/20 bg-white px-5 py-3 text-sm placeholder:text-muted focus:border-copper focus:outline-none" />
-        <button id="ai-send" class="rounded-lg bg-copper px-5 py-3 text-sm font-medium text-white hover:bg-copper-dark transition-colors" style="font-family: system-ui, sans-serif;">Ask</button>
+      <div id="chat-container" class="rounded-xl border border-copper/20 bg-white overflow-hidden">
+        <div id="chat-messages" class="hidden max-h-80 overflow-y-auto px-4 pt-4 pb-2 space-y-3"></div>
+        <div id="chat-input-bar" class="flex gap-2 p-3">
+          <input id="chat-input" type="text" placeholder="Can you do a BBQ for 100? What about gluten-free options? How far in advance should I book?" class="flex-1 rounded-lg border border-copper/20 bg-warm px-5 py-2.5 text-sm placeholder:text-muted focus:border-copper focus:outline-none" />
+          <button id="chat-send" class="rounded-lg bg-copper px-5 py-2.5 text-sm font-medium text-white hover:bg-copper-dark transition-colors" style="font-family: system-ui, sans-serif;">Ask</button>
+        </div>
       </div>
-      <div id="ai-response" class="hidden mt-3 rounded-xl bg-white border border-copper/10 p-4 text-sm leading-relaxed"></div>
     </div>
   </section>
 
@@ -170,21 +172,64 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
       ;(e.target as HTMLFormElement).querySelectorAll('input, select, textarea, button').forEach(el => (el as HTMLInputElement).disabled = true)
     })
 
-    const aiInput = document.getElementById('ai-ask') as HTMLInputElement
-    const aiSend = document.getElementById('ai-send')!
-    const aiResponse = document.getElementById('ai-response')!
-    async function askAI() {
-      const text = aiInput.value.trim()
-      if (!text) return
-      aiResponse.textContent = 'Checking...'
-      aiResponse.classList.remove('hidden')
-      try {
-        const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text }) })
-        const data = await res.json()
-        aiResponse.textContent = data.reply || 'Not sure — fill out the inquiry form and we\'ll help!'
-      } catch { aiResponse.textContent = 'Something went wrong. Email us at events@thecopperladle.com!' }
+    // Multi-turn AI chat
+    const chatInput = document.getElementById('chat-input') as HTMLInputElement
+    const chatSend = document.getElementById('chat-send')!
+    const chatMessages = document.getElementById('chat-messages')!
+    let chatHistory: Array<{ role: string; content: string }> = []
+    let chatBusy = false
+
+    function addMessage(role: string, text: string) {
+      chatMessages.classList.remove('hidden')
+      const wrapper = document.createElement('div')
+      wrapper.className = role === 'user' ? 'flex justify-end' : 'flex justify-start'
+      const bubble = document.createElement('div')
+      bubble.className = role === 'user'
+        ? 'bg-copper text-white rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%] text-sm'
+        : 'bg-warm rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%] text-sm leading-relaxed'
+      bubble.textContent = text
+      wrapper.appendChild(bubble)
+      chatMessages.appendChild(wrapper)
+      chatMessages.scrollTop = chatMessages.scrollHeight
     }
-    aiSend.addEventListener('click', askAI)
-    aiInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') askAI() })
+
+    function showTyping() {
+      const el = document.createElement('div')
+      el.id = 'typing-indicator'
+      el.className = 'flex justify-start'
+      el.innerHTML = '<div class="bg-warm text-muted rounded-2xl rounded-bl-sm px-4 py-2 text-sm">Checking...</div>'
+      chatMessages.appendChild(el)
+      chatMessages.scrollTop = chatMessages.scrollHeight
+    }
+
+    async function sendMessage() {
+      const text = chatInput.value.trim()
+      if (!text || chatBusy) return
+      chatBusy = true
+      chatInput.value = ''
+      addMessage('user', text)
+      showTyping()
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, history: chatHistory }),
+        })
+        const data = await res.json()
+        document.getElementById('typing-indicator')?.remove()
+        const reply = data.reply || "Not sure — fill out the inquiry form and we'll help!"
+        addMessage('assistant', reply)
+        chatHistory.push({ role: 'user', content: text })
+        chatHistory.push({ role: 'assistant', content: reply })
+        if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20)
+      } catch {
+        document.getElementById('typing-indicator')?.remove()
+        addMessage('assistant', 'Something went wrong. Email us at events@thecopperladle.com!')
+      }
+      chatBusy = false
+    }
+
+    chatSend.addEventListener('click', sendMessage)
+    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage() })
   </script>
 </Layout>
