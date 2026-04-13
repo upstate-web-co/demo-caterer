@@ -12,6 +12,9 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200<meta name="robots" content="noindex, nofollow" />q=80" />
   <link rel="preconnect" href="https://images.unsplash.com" />
 </head>
 <body class="bg-linen text-charcoal antialiased">
@@ -24,8 +27,27 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
         <a href="#testimonials" class="text-muted hover:text-copper transition-colors">Reviews</a>
         <a href="#inquiry" class="rounded-lg bg-copper px-5 py-2 font-medium text-white hover:bg-copper-dark transition-colors">Get a Quote</a>
       </div>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden text-charcoal p-2" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-linen/95 backdrop-blur-sm hidden flex-col items-center justify-center gap-6 text-lg" style="font-family: system-ui, sans-serif;">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-charcoal p-2" aria-label="Close menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <a href="#menus" class="text-muted hover:text-copper transition-colors">Menus</a>
+    <a href="#gallery" class="text-muted hover:text-copper transition-colors">Gallery</a>
+    <a href="#testimonials" class="text-muted hover:text-copper transition-colors">Reviews</a>
+    <a href="#inquiry" class="rounded-lg bg-copper px-6 py-3 font-medium text-white hover:bg-copper-dark transition-colors">Get a Quote</a>
+  </div>
   <main><slot /></main>
 
   <!-- Demo Disclaimer -->
@@ -34,6 +56,15 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
       <strong>Portfolio Demo</strong> — This is a fictional business created by <a href="https://upstate-web.com" class="underline hover:text-yellow-900">Upstate Web Co</a>. All names, locations, and details are entirely fictional.
     </p>
   </div>
+
+  <script>
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const close = document.getElementById('mobile-menu-close');
+    btn?.addEventListener('click', () => menu?.classList.replace('hidden', 'flex'));
+    close?.addEventListener('click', () => menu?.classList.replace('flex', 'hidden'));
+    menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu?.classList.replace('flex', 'hidden')));
+  </script>
 
   <footer class="border-t border-copper/10 bg-warm">
     <div class="mx-auto max-w-6xl px-6 py-10">
