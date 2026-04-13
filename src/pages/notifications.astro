@@ -1,0 +1,156 @@
+---
+/**
+ * Notification mockup — "phone reveal" for the Caterer ad.
+ * Script: Owner is prepping tomorrow's mise en place when they check their phone.
+ * Tagline: UWC: your kitchen runs itself.
+ */
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Notifications — The Copper Ladle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            copper: '#B87333',
+            warm: '#1C1714',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-warm min-h-screen text-white">
+  <!-- Status Bar Mockup -->
+  <div class="flex items-center justify-between px-6 py-2 text-xs text-white/60">
+    <span>3:20 PM</span>
+    <div class="flex items-center gap-1"><span>5G</span><span>📶</span><span>🔋 52%</span></div>
+  </div>
+
+  <!-- App Header -->
+  <div class="px-6 pt-4 pb-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm text-white/50">Good afternoon</p>
+        <h1 class="text-2xl font-bold">The Copper Ladle</h1>
+      </div>
+      <div class="relative">
+        <div class="w-10 h-10 rounded-full bg-copper/20 flex items-center justify-center text-lg">🍽️</div>
+        <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-[10px] font-bold">10</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="px-6 grid grid-cols-3 gap-3 mb-6">
+    <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+      <p class="text-2xl font-bold text-copper">4</p>
+      <p class="text-[10px] text-white/50 mt-1">Quote Requests</p>
+    </div>
+    <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+      <p class="text-2xl font-bold text-green-400">$2,800</p>
+      <p class="text-[10px] text-white/50 mt-1">Estimated</p>
+    </div>
+    <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+      <p class="text-2xl font-bold text-blue-400">3</p>
+      <p class="text-[10px] text-white/50 mt-1">AI Chats</p>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="px-6">
+    <h2 class="text-sm font-semibold text-white/40 uppercase tracking-wider mb-4">While you were away</h2>
+    <div class="space-y-3">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+        <div class="flex items-start justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-copper/20 flex items-center justify-center text-sm">📋</div>
+            <div>
+              <p class="text-sm font-medium">Quote request: corporate lunch, 60 people</p>
+              <p class="text-xs text-white/40">Next Thursday · AI gathered budget + venue details</p>
+            </div>
+          </div>
+          <span class="text-[10px] text-white/30">8m ago</span>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+        <div class="flex items-start justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-sm">💬</div>
+            <div>
+              <p class="text-sm font-medium">AI gathered dietary needs from the client</p>
+              <p class="text-xs text-white/40">12 vegetarian, 4 gluten-free, 1 vegan</p>
+            </div>
+          </div>
+          <span class="text-[10px] text-white/30">15m ago</span>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+        <div class="flex items-start justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-copper/20 flex items-center justify-center text-sm">💒</div>
+            <div>
+              <p class="text-sm font-medium">Wedding tasting inquiry — couple wants a menu preview</p>
+              <p class="text-xs text-white/40">September date · 120 guests · rustic theme</p>
+            </div>
+          </div>
+          <span class="text-[10px] text-white/30">30m ago</span>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+        <div class="flex items-start justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-sm">💬</div>
+            <div>
+              <p class="text-sm font-medium">AI recommended the Harvest Menu for an outdoor event</p>
+              <p class="text-xs text-white/40">Client loved the farm-to-table options · requesting quote</p>
+            </div>
+          </div>
+          <span class="text-[10px] text-white/30">45m ago</span>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-xl p-4">
+        <div class="flex items-start justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-copper/20 flex items-center justify-center text-sm">📩</div>
+            <div>
+              <p class="text-sm font-medium">2 follow-up messages from last week's inquiry</p>
+              <p class="text-xs text-white/40">Ready to confirm · waiting on final headcount</p>
+            </div>
+          </div>
+          <span class="text-[10px] text-white/30">1h ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Summary -->
+  <div class="px-6 py-8 mt-4">
+    <div class="bg-copper/10 border border-copper/20 rounded-xl p-5 text-center">
+      <p class="text-copper text-sm font-medium">4 events landed in your inbox while you prepped tomorrow's mise en place.</p>
+      <p class="text-white/50 text-xs mt-1">4 quote requests · 3 AI conversations · $2,800 estimated</p>
+    </div>
+  </div>
+
+  <!-- UWC Branding -->
+  <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-warm via-warm/80 to-transparent py-6 px-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-white text-lg font-bold">UWC</p>
+        <p class="text-copper text-sm">Your kitchen runs itself.</p>
+      </div>
+      <p class="text-white/30 text-xs">upstate-web.com</p>
+    </div>
+  </div>
+</body>
+</html>
