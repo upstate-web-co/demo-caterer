@@ -1,8 +1,8 @@
 export const SITE = {
-  name: 'The Copper Ladle',
+  name: 'Southern Table Catering',
   tagline: 'From our kitchen to your celebration',
-  url: 'https://thecopperladle.com',
-  email: 'events@thecopperladle.com',
+  url: 'https://southerntablecatering.com',
+  email: 'events@southerntablecatering.com',
   phone: '(864) 555-6183',
   location: 'Greenville, SC',
 } as const
@@ -18,8 +18,23 @@ export const MENUS = [
 
 export const EVENT_TYPES = ['Wedding', 'Corporate', 'Rehearsal Dinner', 'Birthday / Anniversary', 'Holiday Party', 'Nonprofit Gala', 'Graduation', 'Other']
 
+export const HOW_IT_WORKS = [
+  { number: '1', title: 'Inquire', description: 'Tell us about your event, date, and guest count.' },
+  { number: '2', title: 'Tasting', description: 'Schedule a private tasting to try your menu options.' },
+  { number: '3', title: 'Plan', description: 'We finalize the menu, timeline, and logistics together.' },
+  { number: '4', title: 'Celebrate', description: 'We handle everything on the day. You enjoy your event.' },
+]
+
+export const MENU_TYPE_COLORS: Record<string, string> = {
+  'Buffet': 'bg-copper/10 text-copper',
+  'Plated': 'bg-olive/10 text-olive',
+  'Station': 'bg-amber-700/10 text-amber-700',
+  'Family Style': 'bg-purple-700/10 text-purple-700',
+  'Passed': 'bg-teal-700/10 text-teal-700',
+}
+
 export const TESTIMONIALS = [
-  { quote: 'Copper Ladle catered our 200-person wedding and every single guest raved about the food. The shrimp and grits station was the highlight of the night.', author: 'Emily & Ryan', event: 'Wedding, 200 guests, The Grandview Estate' },
+  { quote: 'Southern Table catered our 200-person wedding and every single guest raved about the food. The shrimp and grits station was the highlight of the night.', author: 'Emily & Ryan', event: 'Wedding, 200 guests, The Cliffs' },
   { quote: 'We\'ve used them for 3 corporate events now. They handle everything — setup, serving, cleanup. Our team just shows up and eats.', author: 'Morgan P.', event: 'Corporate quarterly dinners, 80 guests' },
   { quote: 'The farm-to-table menu was incredible. They worked with our venue to create something truly special and seasonal.', author: 'Jen W.', event: 'Anniversary party, 60 guests' },
 ]

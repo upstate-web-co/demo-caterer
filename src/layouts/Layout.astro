@@ -11,149 +11,34 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="robots" content="noindex, nofollow" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=80" />
   <link rel="preconnect" href="https://images.unsplash.com" />
 </head>
 <body class="bg-linen text-charcoal antialiased">
   <nav class="sticky top-0 z-50 bg-linen/95 backdrop-blur-sm border-b border-copper/10">
     <div class="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
-      <a href="/" class="text-xl tracking-wide"><span class="text-copper">Copper</span> Ladle</a>
+      <a href="/" class="text-xl tracking-wide"><span class="text-copper">Southern</span> Table</a>
       <div class="hidden md:flex items-center gap-6 text-sm" style="font-family: system-ui, sans-serif;">
         <a href="#menus" class="text-muted hover:text-copper transition-colors">Menus</a>
         <a href="#gallery" class="text-muted hover:text-copper transition-colors">Gallery</a>
         <a href="#testimonials" class="text-muted hover:text-copper transition-colors">Reviews</a>
         <a href="#inquiry" class="rounded-lg bg-copper px-5 py-2 font-medium text-white hover:bg-copper-dark transition-colors">Get a Quote</a>
       </div>
-      <div class="flex items-center gap-2">
-        <button id="cart-toggle" class="relative p-2 text-charcoal" aria-label="Open cart">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-          <span id="cart-badge" class="hidden absolute -top-1 -right-1 w-5 h-5 rounded-full bg-copper text-white text-xs flex items-center justify-center">0</span>
-        </button>
-        <!-- Mobile menu button -->
-        <button id="mobile-menu-btn" class="md:hidden text-charcoal p-2" aria-label="Open menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
     </div>
   </nav>
-
-  <!-- Cart backdrop -->
-  <div id="cart-backdrop" class="hidden fixed inset-0 z-[65] bg-black/40"></div>
-  <!-- Cart drawer -->
-  <div id="cart-drawer" class="fixed top-0 right-0 z-[70] h-full w-80 bg-white shadow-xl transform translate-x-full transition-transform duration-300 flex flex-col">
-    <div class="flex items-center justify-between p-4 border-b border-copper/10">
-      <h3 class="font-semibold text-charcoal">Your Event Quote</h3>
-      <button id="cart-close" class="text-muted hover:text-charcoal">✕</button>
-    </div>
-    <div id="cart-items" class="flex-1 overflow-y-auto p-4 text-charcoal"></div>
-    <div class="border-t border-copper/10 p-4">
-      <div class="flex justify-between font-semibold text-charcoal mb-3">
-        <span>Subtotal</span><span id="cart-subtotal">$0.00</span>
-      </div>
-      <button id="cart-checkout" class="w-full py-3 rounded-lg bg-copper text-white font-medium hover:bg-copper-dark transition-colors" style="font-family: system-ui, sans-serif;">Request Quote</button>
-      <p id="cart-checkout-msg" class="hidden mt-2 text-xs text-muted text-center">
-        This is a portfolio demo by <a href="https://upstate-web.com" class="underline">Upstate Web Co</a>. In production, this connects to secure Stripe checkout.
-      </p>
-    </div>
-  </div>
-
-  <!-- Mobile menu overlay -->
-  <div id="mobile-menu" class="fixed inset-0 z-[60] bg-linen/95 backdrop-blur-sm hidden flex-col items-center justify-center gap-6 text-lg" style="font-family: system-ui, sans-serif;">
-    <button id="mobile-menu-close" class="absolute top-6 right-6 text-charcoal p-2" aria-label="Close menu">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
-    <a href="#menus" class="text-muted hover:text-copper transition-colors">Menus</a>
-    <a href="#gallery" class="text-muted hover:text-copper transition-colors">Gallery</a>
-    <a href="#testimonials" class="text-muted hover:text-copper transition-colors">Reviews</a>
-    <a href="#inquiry" class="rounded-lg bg-copper px-6 py-3 font-medium text-white hover:bg-copper-dark transition-colors">Get a Quote</a>
-  </div>
   <main><slot /></main>
 
   <!-- Demo Disclaimer -->
   <div class="bg-yellow-50 border-y border-yellow-200 py-3 px-6 text-center">
     <p class="text-xs text-yellow-800">
-      <strong>Portfolio Demo</strong> — This is a fictional business created by <a href="https://upstate-web.com" class="underline hover:text-yellow-900">Upstate Web Co</a>. All names, locations, and details are entirely fictional.
+      <strong>Portfolio Demo</strong> — This is a sample site built by <a href="https://upstate-web.com" class="underline hover:text-yellow-900">Upstate Web Co</a> to showcase what we build for this industry. This is not a real business.
     </p>
   </div>
-
-  <script>
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    const close = document.getElementById('mobile-menu-close');
-    btn?.addEventListener('click', () => menu?.classList.replace('hidden', 'flex'));
-    close?.addEventListener('click', () => menu?.classList.replace('flex', 'hidden'));
-    menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu?.classList.replace('flex', 'hidden')));
-  </script>
-  <script>
-    let cart: {name: string; price: number; qty: number}[] = [];
-
-    function addToCart(name: string, price: string) {
-      const existing = cart.find(i => i.name === name);
-      if (existing) { existing.qty++; } else { cart.push({ name, price: parseFloat(price), qty: 1 }); }
-      updateCartUI();
-    }
-
-    function removeFromCart(index: number) { cart.splice(index, 1); updateCartUI(); }
-    function changeQty(index: number, delta: number) { cart[index].qty += delta; if (cart[index].qty < 1) removeFromCart(index); else updateCartUI(); }
-
-    function updateCartUI() {
-      const badge = document.getElementById('cart-badge')!;
-      const items = document.getElementById('cart-items')!;
-      const subtotal = document.getElementById('cart-subtotal')!;
-      const count = cart.reduce((s, i) => s + i.qty, 0);
-      badge.textContent = String(count);
-      badge.classList.toggle('hidden', count === 0);
-      items.innerHTML = cart.map((item, i) => `
-        <div class="flex items-center justify-between py-3 border-b border-copper/10">
-          <div class="flex-1">
-            <p class="font-medium text-sm">${item.name}</p>
-            <p class="text-xs text-muted">$${item.price.toFixed(2)}/person</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button data-qty-minus="${i}" class="w-6 h-6 rounded bg-copper/10 text-sm font-bold">−</button>
-            <span class="text-sm w-4 text-center">${item.qty}</span>
-            <button data-qty-plus="${i}" class="w-6 h-6 rounded bg-copper/10 text-sm font-bold">+</button>
-            <button data-remove="${i}" class="ml-2 text-copper text-xs">✕</button>
-          </div>
-        </div>
-      `).join('');
-      subtotal.textContent = '$' + cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
-      items.querySelectorAll('[data-qty-minus]').forEach(b => b.addEventListener('click', () => changeQty(Number((b as HTMLElement).dataset.qtyMinus), -1)));
-      items.querySelectorAll('[data-qty-plus]').forEach(b => b.addEventListener('click', () => changeQty(Number((b as HTMLElement).dataset.qtyPlus), 1)));
-      items.querySelectorAll('[data-remove]').forEach(b => b.addEventListener('click', () => removeFromCart(Number((b as HTMLElement).dataset.remove))));
-    }
-
-    document.getElementById('cart-toggle')?.addEventListener('click', () => {
-      document.getElementById('cart-drawer')?.classList.toggle('translate-x-full');
-      document.getElementById('cart-backdrop')?.classList.toggle('hidden');
-    });
-    document.getElementById('cart-close')?.addEventListener('click', () => {
-      document.getElementById('cart-drawer')?.classList.add('translate-x-full');
-      document.getElementById('cart-backdrop')?.classList.add('hidden');
-    });
-    document.getElementById('cart-backdrop')?.addEventListener('click', () => {
-      document.getElementById('cart-drawer')?.classList.add('translate-x-full');
-      document.getElementById('cart-backdrop')?.classList.add('hidden');
-    });
-    document.getElementById('cart-checkout')?.addEventListener('click', () => {
-      document.getElementById('cart-checkout-msg')?.classList.remove('hidden');
-    });
-
-    (window as any).addToCart = addToCart;
-  </script>
 
   <footer class="border-t border-copper/10 bg-warm">
     <div class="mx-auto max-w-6xl px-6 py-10">
       <div class="grid md:grid-cols-3 gap-8">
         <div>
-          <p class="text-lg tracking-wide"><span class="text-copper">Copper</span> Ladle</p>
+          <p class="text-lg tracking-wide"><span class="text-copper">Southern</span> Table</p>
           <p class="text-sm text-muted mt-2">{SITE.tagline}</p>
           <p class="text-sm text-muted">{SITE.location}</p>
         </div>
@@ -173,5 +58,11 @@ const { title = `${SITE.name} — ${SITE.tagline}`, description = `Full-service 
       </div>
     </div>
   </footer>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') })
+    }, { threshold: 0.08, rootMargin: '-20px' })
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+  </script>
 </body>
 </html>

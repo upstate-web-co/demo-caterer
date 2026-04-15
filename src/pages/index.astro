@@ -1,15 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
+import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS, HOW_IT_WORKS, MENU_TYPE_COLORS } from '../lib/config'
 ---
 
 <Layout>
   <!-- Hero -->
   <section class="relative h-[70vh] flex items-center justify-center overflow-hidden">
-    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=75&auto=format" alt="Catering spread" class="absolute inset-0 w-full h-full object-cover brightness-[0.35]" loading="eager" width="1200" height="800" fetchpriority="high" />
+    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=1600&q=80" alt="Catering spread" class="absolute inset-0 w-full h-full object-cover brightness-[0.35]" loading="eager" />
     <div class="relative text-center px-6">
       <p class="text-copper-light text-sm uppercase tracking-[0.25em] mb-4" style="font-family: system-ui, sans-serif;">Full-Service Catering · Greenville, SC</p>
-      <h1 class="text-5xl md:text-7xl text-white tracking-tight">The Copper Ladle</h1>
+      <h1 class="text-5xl md:text-7xl text-white tracking-tight">Southern Table</h1>
       <p class="mt-4 text-xl text-white/80 italic">{SITE.tagline}</p>
       <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center" style="font-family: system-ui, sans-serif;">
         <a href="#inquiry" class="rounded-lg bg-copper px-8 py-3 font-medium text-white hover:bg-copper-dark transition-colors">Get a Quote</a>
@@ -18,13 +18,25 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
     </div>
   </section>
 
-  <!-- AI Chat -->
-  <section class="bg-warm py-6 px-6">
+  <!-- Inline AI Chat -->
+  <section class="bg-warm py-8 px-6">
     <div class="mx-auto max-w-xl">
-      <div id="chat-container" class="rounded-xl border border-copper/20 bg-white overflow-hidden">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80" alt="Southern Table" class="w-12 h-12 rounded-full object-cover border-2 border-copper/25 shadow-sm" />
+        <div>
+          <p class="text-sm font-medium text-charcoal" style="font-family: system-ui, sans-serif;">Ask Southern Table</p>
+          <p class="text-xs text-muted">Menus, pricing, dietary options, availability</p>
+        </div>
+      </div>
+      <div class="rounded-xl border border-copper/15 bg-white overflow-hidden">
         <div id="chat-messages" class="hidden max-h-80 overflow-y-auto px-4 pt-4 pb-2 space-y-3"></div>
-        <div id="chat-input-bar" class="flex gap-2 p-3">
-          <input id="chat-input" type="text" placeholder="Can you do a BBQ for 100? What about gluten-free options? How far in advance should I book?" class="flex-1 rounded-lg border border-copper/20 bg-warm px-5 py-2.5 text-sm placeholder:text-muted focus:border-copper focus:outline-none" />
+        <div id="chat-quick" class="flex gap-2 px-3 py-2.5 overflow-x-auto border-b border-copper/10" style="font-family: system-ui, sans-serif;">
+          <button class="chat-q shrink-0 rounded-full border border-copper/20 bg-copper/5 px-3 py-1.5 text-xs font-medium text-copper hover:bg-copper/10 transition-colors" data-msg="What menus do you offer?">Menus</button>
+          <button class="chat-q shrink-0 rounded-full border border-copper/20 bg-copper/5 px-3 py-1.5 text-xs font-medium text-copper hover:bg-copper/10 transition-colors" data-msg="Can you accommodate gluten-free and vegan guests?">Dietary</button>
+          <button class="chat-q shrink-0 rounded-full border border-copper/20 bg-copper/5 px-3 py-1.5 text-xs font-medium text-copper hover:bg-copper/10 transition-colors" data-msg="How much does catering cost per person?">Pricing</button>
+        </div>
+        <div class="flex gap-2 p-3">
+          <input id="chat-input" type="text" placeholder="Ask about menus, pricing, availability..." maxlength="500" autocomplete="off" class="flex-1 rounded-lg border border-copper/15 bg-linen px-5 py-2.5 text-sm text-charcoal placeholder:text-muted focus:border-copper focus:outline-none" />
           <button id="chat-send" class="rounded-lg bg-copper px-5 py-2.5 text-sm font-medium text-white hover:bg-copper-dark transition-colors" style="font-family: system-ui, sans-serif;">Ask</button>
         </div>
       </div>
@@ -34,18 +46,33 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
   <!-- Menus -->
   <section id="menus" class="py-20 px-6">
     <div class="mx-auto max-w-4xl">
-      <h2 class="text-3xl text-center mb-2">Our Menus</h2>
+      <h2 class="reveal text-3xl text-center mb-2">Our Menus</h2>
       <p class="text-center text-muted text-sm mb-10">Every menu is customizable. These are starting points — we build around your vision, venue, and budget.</p>
       <div class="grid md:grid-cols-2 gap-5">
         {MENUS.map((menu) => (
-          <div class="rounded-xl border border-copper/10 bg-white p-6">
+          <div class="rounded-xl border border-copper/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-copper/25">
             <div class="flex items-start justify-between mb-2">
               <h3 class="text-lg font-medium">{menu.name}</h3>
-              <span class="text-xs bg-copper/10 text-copper px-2 py-1 rounded-full" style="font-family: system-ui, sans-serif;">{menu.type}</span>
+              <span class={`text-xs px-2 py-1 rounded-full font-medium ${MENU_TYPE_COLORS[menu.type] || 'bg-copper/10 text-copper'}`} style="font-family: system-ui, sans-serif;">{menu.type}</span>
             </div>
             <p class="text-copper font-medium" style="font-family: system-ui, sans-serif;">{menu.price}</p>
             <p class="text-sm text-muted mt-2 leading-relaxed">{menu.description}</p>
-            <button data-add-item data-name={menu.name} data-price={menu.price.replace(/[^0-9]/g, '')} data-label="Add to Quote" class="mt-3 rounded-lg bg-copper/10 text-copper text-xs font-medium px-3 py-1.5 hover:bg-copper/20 transition-colors" style="font-family: system-ui, sans-serif;">Add to Quote</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20 px-6 bg-warm">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="reveal text-3xl text-center mb-12">How It Works</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {HOW_IT_WORKS.map((step) => (
+          <div class="reveal">
+            <div class="w-12 h-12 rounded-full bg-copper/10 text-copper flex items-center justify-center mx-auto mb-3 text-lg font-bold" style="font-family: system-ui, sans-serif;">{step.number}</div>
+            <h3 class="font-medium text-charcoal" style="font-family: system-ui, sans-serif;">{step.title}</h3>
+            <p class="text-sm text-muted mt-2">{step.description}</p>
           </div>
         ))}
       </div>
@@ -53,16 +80,16 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
   </section>
 
   <!-- Gallery -->
-  <section id="gallery" class="py-20 px-6 bg-warm">
+  <section id="gallery" class="py-20 px-6">
     <div class="mx-auto max-w-6xl">
-      <h2 class="text-3xl text-center mb-10">From Our Kitchen</h2>
+      <h2 class="reveal text-3xl text-center mb-10">From Our Kitchen</h2>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Plated dinner" class="rounded-xl aspect-square object-cover" loading="lazy" />
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Appetizers" class="rounded-xl aspect-square object-cover" loading="lazy" />
-        <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80" alt="BBQ spread" class="rounded-xl aspect-square object-cover" loading="lazy" />
-        <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&q=80" alt="Catering setup" class="rounded-xl aspect-square object-cover" loading="lazy" />
-        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&q=80" alt="Dessert display" class="rounded-xl aspect-square object-cover" loading="lazy" />
-        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Farm to table" class="rounded-xl aspect-square object-cover" loading="lazy" />
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Plated dinner" class="aspect-square object-cover hover:scale-110 transition-transform duration-500" loading="lazy" /></div>
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Appetizers" class="aspect-square object-cover hover:scale-110 transition-transform duration-500" loading="lazy" /></div>
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80" alt="BBQ spread" class="aspect-square object-cover hover:scale-110 transition-transform duration-500" loading="lazy" /></div>
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&q=80" alt="Catering setup" class="aspect-square object-cover hover:scale-110 transition-transform duration-500" loading="lazy" /></div>
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&q=80" alt="Dessert display" class="aspect-square object-cover hover:scale-110 transition-transform duration-500" loading="lazy" /></div>
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Farm to table" class="aspect-square object-cover hover:scale-110 transition-transform duration-500" loading="lazy" /></div>
       </div>
     </div>
   </section>
@@ -70,14 +97,14 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
   <!-- Testimonials -->
   <section id="testimonials" class="py-20 px-6">
     <div class="mx-auto max-w-4xl">
-      <h2 class="text-3xl text-center mb-10">What Our Clients Say</h2>
+      <h2 class="reveal text-3xl text-center mb-10">What Our Clients Say</h2>
       <div class="grid md:grid-cols-3 gap-5">
         {TESTIMONIALS.map((t) => (
-          <div class="rounded-xl border border-copper/10 bg-white p-6">
+          <div class="rounded-xl border border-copper/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-copper/25">
             <p class="text-sm italic leading-relaxed">"{t.quote}"</p>
             <div class="mt-4 pt-3 border-t border-copper/10">
               <p class="text-sm font-medium">{t.author}</p>
-              <p class="text-xs text-muted">{t.event}</p>
+              <p class="text-xs text-copper font-medium">{t.event}</p>
             </div>
           </div>
         ))}
@@ -88,7 +115,7 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
   <!-- Inquiry Form -->
   <section id="inquiry" class="py-20 px-6 bg-warm">
     <div class="mx-auto max-w-2xl">
-      <h2 class="text-3xl text-center mb-2">Tell Us About Your Event</h2>
+      <h2 class="reveal text-3xl text-center mb-2">Tell Us About Your Event</h2>
       <p class="text-center text-muted text-sm mb-10">The more detail you share, the better we can quote. We respond within 24 hours.</p>
       <form id="inquiry-form" class="space-y-4 bg-white rounded-xl border border-copper/10 p-6">
         <div class="grid sm:grid-cols-2 gap-4">
@@ -151,19 +178,6 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
   </section>
 
   <script>
-    document.querySelectorAll('[data-add-item]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const el = btn as HTMLElement;
-        const name = el.dataset.name!;
-        const price = el.dataset.price!;
-        (window as any).addToCart(name, price);
-        el.textContent = 'Added!';
-        setTimeout(() => { el.textContent = el.dataset.label || 'Add to Quote'; }, 1000);
-      });
-    });
-  </script>
-
-  <script>
     document.getElementById('inquiry-form')?.addEventListener('submit', (e) => {
       e.preventDefault()
       const status = document.getElementById('form-status')!
@@ -172,75 +186,44 @@ import { SITE, MENUS, EVENT_TYPES, TESTIMONIALS } from '../lib/config'
       ;(e.target as HTMLFormElement).querySelectorAll('input, select, textarea, button').forEach(el => (el as HTMLInputElement).disabled = true)
     })
 
-    // Multi-turn AI chat
     const chatInput = document.getElementById('chat-input') as HTMLInputElement
     const chatSend = document.getElementById('chat-send')!
     const chatMessages = document.getElementById('chat-messages')!
-    let chatHistory: Array<{ role: string; content: string }> = []
+    const chatQuick = document.getElementById('chat-quick')!
+    const chatHistory: Array<{ role: string; content: string }> = []
     let chatBusy = false
-
-    function addMessage(role: string, text: string) {
+    function escapeHtml(t: string): string { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br />') }
+    function linkify(h: string): string {
+      h = h.replace(/\(864\)\s*555-6183/g, '<a href="tel:+18645556183" class="text-copper underline">(864) 555-6183</a>')
+      h = h.replace(/events@southerntablecatering\.com/g, '<a href="mailto:events@southerntablecatering.com" class="text-copper underline">events@southerntablecatering.com</a>')
+      return h
+    }
+    function addMsg(role: string, text: string) {
       chatMessages.classList.remove('hidden')
-      const wrapper = document.createElement('div')
-      wrapper.className = role === 'user' ? 'flex justify-end' : 'flex justify-start'
+      const el = document.createElement('div'); el.className = role === 'user' ? 'flex justify-end' : 'flex justify-start'
       const bubble = document.createElement('div')
-      bubble.className = role === 'user'
-        ? 'bg-copper text-white rounded-2xl rounded-br-sm px-4 py-2 max-w-[80%] text-sm'
-        : 'bg-warm rounded-2xl rounded-bl-sm px-4 py-2 max-w-[80%] text-sm leading-relaxed'
-      if (role === 'assistant') {
-        const escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-        let html = escaped.replace(/\[\[ADD:([^:]+):([^\]]+)\]\]/g, (_, name, price) => {
-          const safeName = name.replace(/'/g, "\\'")
-          return `<button onclick="(window).addToCart('${safeName}', '${price}')" class="inline-block mt-1 px-3 py-1 rounded-lg bg-copper/20 text-copper text-xs font-bold hover:bg-copper/30 transition-colors">+ Add ${name} to cart</button>`
-        })
-        html = html.replace(/\((\d{3})\)\s*(\d{3})-(\d{4})/g, '<a href="tel:$1$2$3" class="underline">($1) $2-$3</a>')
-        html = html.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, '<a href="mailto:$1" class="underline">$1</a>')
-        bubble.innerHTML = html
-      } else {
-        bubble.textContent = text
-      }
-      wrapper.appendChild(bubble)
-      chatMessages.appendChild(wrapper)
-      chatMessages.scrollTop = chatMessages.scrollHeight
+      bubble.className = role === 'user' ? 'bg-copper/8 text-charcoal rounded-xl rounded-tr-sm px-4 py-2.5 max-w-[80%] text-sm leading-relaxed' : 'bg-linen text-charcoal rounded-xl rounded-tl-sm px-4 py-2.5 max-w-[80%] text-sm leading-relaxed border border-copper/8'
+      bubble.innerHTML = role === 'user' ? escapeHtml(text) : linkify(escapeHtml(text))
+      el.appendChild(bubble); chatMessages.appendChild(el); chatMessages.scrollTop = chatMessages.scrollHeight
     }
-
     function showTyping() {
-      const el = document.createElement('div')
-      el.id = 'typing-indicator'
-      el.className = 'flex justify-start'
-      el.innerHTML = '<div class="bg-warm text-muted rounded-2xl rounded-bl-sm px-4 py-2 text-sm">Checking...</div>'
-      chatMessages.appendChild(el)
-      chatMessages.scrollTop = chatMessages.scrollHeight
+      const el = document.createElement('div'); el.id = 'typing-indicator'; el.className = 'flex justify-start'
+      el.innerHTML = '<div class="bg-linen border border-copper/8 rounded-xl rounded-tl-sm px-4 py-2.5"><div class="flex gap-1.5 items-center h-5"><span class="w-1.5 h-1.5 rounded-full bg-copper/30 animate-bounce"></span><span class="w-1.5 h-1.5 rounded-full bg-copper/30 animate-bounce" style="animation-delay:.15s"></span><span class="w-1.5 h-1.5 rounded-full bg-copper/30 animate-bounce" style="animation-delay:.3s"></span></div></div>'
+      chatMessages.appendChild(el); chatMessages.scrollTop = chatMessages.scrollHeight
     }
-
-    async function sendMessage() {
-      const text = chatInput.value.trim()
-      if (!text || chatBusy) return
-      chatBusy = true
-      chatInput.value = ''
-      addMessage('user', text)
-      showTyping()
+    async function sendChat(text: string) {
+      if (!text || chatBusy) return; chatBusy = true; chatInput.value = ''; addMsg('user', text); showTyping()
       try {
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, history: chatHistory }),
-        })
-        const data = await res.json()
+        const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, history: chatHistory }) })
         document.getElementById('typing-indicator')?.remove()
-        const reply = data.reply || "Not sure — fill out the inquiry form and we'll help!"
-        addMessage('assistant', reply)
-        chatHistory.push({ role: 'user', content: text })
-        chatHistory.push({ role: 'assistant', content: reply })
-        if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20)
-      } catch {
-        document.getElementById('typing-indicator')?.remove()
-        addMessage('assistant', 'Something went wrong. Email us at events@thecopperladle.com!')
-      }
-      chatBusy = false
+        const data = await res.json(); const reply = data.reply || 'Not sure — fill out the inquiry form!'
+        addMsg('assistant', reply); chatHistory.push({ role: 'user', content: text }); chatHistory.push({ role: 'assistant', content: reply })
+        if (chatHistory.length > 20) chatHistory.splice(0, chatHistory.length - 20)
+      } catch { document.getElementById('typing-indicator')?.remove(); addMsg('assistant', 'Something went wrong. Email events@southerntablecatering.com!') }
+      chatBusy = false; chatInput.focus()
     }
-
-    chatSend.addEventListener('click', sendMessage)
-    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage() })
+    chatSend.addEventListener('click', () => sendChat(chatInput.value.trim()))
+    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendChat(chatInput.value.trim()) })
+    document.querySelectorAll('.chat-q').forEach(btn => { btn.addEventListener('click', () => { sendChat((btn as HTMLElement).dataset.msg!); chatQuick.remove() }) })
   </script>
 </Layout>
